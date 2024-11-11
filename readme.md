@@ -51,6 +51,12 @@ event=video/brightnessdown
 action=/path/to/your/setBrightness.sh down
 ```
 
+**Install `ddcutil`:**
+
+```bash
+sudo apt install ddcutil
+```
+
 **Reload the ACPI Event Daemon:**
 
 After configuring the events, reload the ACPI event daemon to apply the changes:
@@ -59,16 +65,30 @@ After configuring the events, reload the ACPI event daemon to apply the changes:
 sudo systemctl restart acpid
 ```
 
-### Other files explanation:
+### How to refresh the cache:
 
-`setBrightness_byPercent.sh` - to set fixed brightness on all automatically detected monitors like: `setBrightness_byPercent.sh 70` to set brightness 70%.
+If you want to force a refresh, you can delete the cache file manually:
 
-`setBrightness_autoButSlower.sh` - to set brightness + or - 10% by running with `up` or `down` on all automatically detected monitors like: `setBrightness_autoButSlower.sh up`
+```bash
+rm /tmp/ddcutil_bus_cache
+```
 
-`setBrightness.sh` - to set brightness + or - 10% by running with `up` or `down` on manually selected monitors (after checking monitor bus), like `setBrightness_autoButSlower.sh up`. This script works faster than others, because it do not check brighness level and do not check available monitors.
+It could be useful when you change monitor or connect it to different HDMI/DP port.
 
-### How to check monitor buses:
+### To check cache content:
+
+```bash
+cat /tmp/ddcutil_bus_cache
+```
+
+### To manually check monitor buses:
 
 ```bash
 ddcutil detect | awk '/I2C bus:/ {print $3}' | sed 's/\/dev\/i2c-//'
+```
+
+### How to check monitor details:
+
+```bash
+ddcutil detect
 ```
