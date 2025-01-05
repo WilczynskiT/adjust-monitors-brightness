@@ -1,6 +1,6 @@
 # Readme
 
-### How to install setBrightness.sh:
+### How to install adjust_monitors_brightness.sh:
 
 **Install `acpi` (if it's not already installed)**::
 
@@ -35,7 +35,7 @@ Add the following content:
 
 ```bash
 event=video/brightnessup
-action=/path/to/your/setBrightness.sh up
+action=/path/to/your/adjust_monitors_brightness.sh up
 ```
 
 Similarly, create a file for the brightness down key:
@@ -48,7 +48,7 @@ Add add this:
 
 ```bash
 event=video/brightnessdown
-action=/path/to/your/setBrightness.sh down
+action=/path/to/your/adjust_monitors_brightness.sh down
 ```
 
 **Install `ddcutil`:**
